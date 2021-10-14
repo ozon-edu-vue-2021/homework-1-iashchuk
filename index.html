@@ -117,12 +117,27 @@
                 step: JS_STEP_VALUE,
             };
 
+            const getSum = function () {
+                const newCounter = data.counter + data.step;
+                sumEl.textContent = newCounter;
+            };
+
             const init = function () {
                 buttonCounterElMinus.textContent = `-${JS_COUNTER_VALUE}`;
                 buttonCounterElPlus.textContent = `+${JS_COUNTER_VALUE}`;
                 buttonStepElMinus.textContent = `-${JS_STEP_VALUE}`;
                 buttonStepElPlus.textContent = `+${JS_STEP_VALUE}`;
                 buttonStepElMultiply.textContent = `x${JS_STEP_VALUE}`;
+                counterEl.textContent = data.counter;
+                stepEl.textContent = data.step;
+
+                buttonCounterElMinus.addEventListener('click', decrementCounterHandler);
+                buttonCounterElPlus.addEventListener('click', incrementCounterHandler);
+                buttonStepElPlus.addEventListener('click', incrementStepHandler);
+                buttonStepElMinus.addEventListener('click', decrementStepHandler);
+                buttonStepElMultiply.addEventListener('click', multiplyStepHandler);
+
+                getSum();
             };
 
             const incrementCounterHandler = function () {
@@ -150,11 +165,6 @@
                 stepEl.textContent = data.step;
             };
 
-            const getSum = function () {
-                const newCounter = data.counter + data.step;
-                sumEl.textContent = newCounter;
-            };
-
             const queue = [getSum];
 
             Object.keys(data).forEach((key) => {
@@ -171,16 +181,7 @@
                 });
             });
 
-            counterEl.textContent = data.counter;
-            stepEl.textContent = data.step;
             init();
-            getSum();
-
-            buttonCounterElMinus.addEventListener('click', decrementCounterHandler);
-            buttonCounterElPlus.addEventListener('click', incrementCounterHandler);
-            buttonStepElPlus.addEventListener('click', incrementStepHandler);
-            buttonStepElMinus.addEventListener('click', decrementStepHandler);
-            buttonStepElMultiply.addEventListener('click', multiplyStepHandler);
         </script>
     </body>
 </html>
